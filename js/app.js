@@ -20,7 +20,6 @@ const displayData = (data) => {
     const searchInput = document.getElementById("search-btn");
     const searchText = searchInput.value;
     const showCard = document.getElementById("show-card");
-
     showCard.textContent = "";
     searchInput.value = "";
     const showMoreDetails = document.getElementById("show-more-details");
@@ -28,14 +27,16 @@ const displayData = (data) => {
   } else {
     getError.textContent = "";
     const searchInput = document.getElementById("search-btn");
-    const searchText = searchInput.value;
+      const searchText = searchInput.value;
+      searchInput.value = ''; 
     const resultData = data.data.slice(0, 20);
     console.log(resultData);
     const showCard = document.getElementById("show-card");
 
     showCard.textContent = "";
     const showMoreDetails = document.getElementById("show-more-details");
-    showMoreDetails.textContent = "";
+      showMoreDetails.textContent = "";
+     
 
     for (const result of resultData) {
       const div = document.createElement("div");
@@ -46,7 +47,7 @@ const displayData = (data) => {
       div.innerHTML = `
       
          <div>
-             <img src="${result.image}" class="img-fluid" />
+             <img  src="${result.image}" class="img-fluid" />
         </div>
         <div> 
             <h2 class="mt-2">${result.phone_name}</h2>
@@ -68,6 +69,8 @@ const loadDetails = (id) => {
     .then((res) => res.json())
     .then((data) => displayDetails(data));
 };
+
+
 // display more details of phone in UI
 const displayDetails = (data) => {
   console.log(data.data);
@@ -95,7 +98,7 @@ const displayDetails = (data) => {
   }
 
   div1.innerHTML = `
-      <img src="${data.data.image}" class="img-fluid" /> 
+      <img src="${data.data.image}" class="img-fluid h-100" /> 
     `;
   div2.innerHTML = `
     <h3 >${data.data.name}</h3>
