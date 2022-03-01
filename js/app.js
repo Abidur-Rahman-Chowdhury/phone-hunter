@@ -82,9 +82,10 @@ const displayDetails = (data) => {
 
   console.log(sensors);
   const div1 = document.createElement("div");
-  div1.classList.add("col-5");
+    div1.classList.add("col-md-5");
+    div1.classList.add("mb-3");
   const div2 = document.createElement("div");
-  div2.classList.add("col-7");
+  div2.classList.add("col-md-7");
   const div3 = document.createElement("div");
   if (otherInformation != undefined) {
     for (const [key, value] of Object.entries(otherInformation)) {
@@ -98,7 +99,7 @@ const displayDetails = (data) => {
   }
 
   div1.innerHTML = `
-      <img src="${data.data.image}" class="img-fluid h-100" /> 
+      <img src="${data.data.image}" class="img-fluid h-75" /> 
     `;
   div2.innerHTML = `
     <h3 >${data.data.name}</h3>
