@@ -7,7 +7,6 @@ const loadData = () => {
   const searchInput = document.getElementById("search-btn");
   const searchText = searchInput.value;
   const url = `https://openapi.programming-hero.com/api/phones?search=${searchText}`;
-  console.log(url);
 
   fetch(url)
     .then((res) => res.json())
@@ -27,16 +26,15 @@ const displayData = (data) => {
   } else {
     getError.textContent = "";
     const searchInput = document.getElementById("search-btn");
-      const searchText = searchInput.value;
-      searchInput.value = ''; 
+    const searchText = searchInput.value;
+    searchInput.value = "";
     const resultData = data.data.slice(0, 20);
-    console.log(resultData);
+
     const showCard = document.getElementById("show-card");
 
     showCard.textContent = "";
     const showMoreDetails = document.getElementById("show-more-details");
-      showMoreDetails.textContent = "";
-     
+    showMoreDetails.textContent = "";
 
     for (const result of resultData) {
       const div = document.createElement("div");
@@ -64,35 +62,30 @@ const displayData = (data) => {
 // load more details data
 const loadDetails = (id) => {
   const url = `https://openapi.programming-hero.com/api/phone/${id}`;
-  console.log(url);
+
   fetch(url)
     .then((res) => res.json())
     .then((data) => displayDetails(data));
 };
 
-
 // display more details of phone in UI
 const displayDetails = (data) => {
-  console.log(data.data);
-
   const showMoreDetails = document.getElementById("show-more-details");
   showMoreDetails.textContent = "";
   const sensors = [...data.data.mainFeatures.sensors].join(", ");
   const otherInformation = data.data.others;
 
-  console.log(sensors);
   const div1 = document.createElement("div");
-    div1.classList.add("col-md-5");
-    div1.classList.add("mb-3");
+  div1.classList.add("col-md-5");
+  div1.classList.add("mb-3");
   const div2 = document.createElement("div");
-  div2.classList.add("col-md-7");
+    div2.classList.add("col-md-7");
   const div3 = document.createElement("div");
   if (otherInformation != undefined) {
     for (const [key, value] of Object.entries(otherInformation)) {
       const li = document.createElement("li");
       li.innerText = `${key}: ${value}`;
       div3.appendChild(li);
-      console.log(`${key}: ${value}`);
     }
   } else {
     div3.innerText = "not found";
