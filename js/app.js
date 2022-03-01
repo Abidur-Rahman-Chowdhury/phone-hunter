@@ -58,3 +58,13 @@ const displayData = (data) => {
   }
 };
 
+// load more details data 
+const loadDetails = (id) => {
+    const url = `https://openapi.programming-hero.com/api/phone/${id}`;
+    fetch(url)
+        .then(res => res.json())
+        .then(data => displayDetails(data));
+}
+
+
+
