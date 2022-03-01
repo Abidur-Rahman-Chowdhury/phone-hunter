@@ -36,10 +36,10 @@ const displayData = (data) => {
 
     for (const result of resultData) {
         const div = document.createElement("div");
-        
         div.classList.add("col-md-4");
         div.classList.add('border-1');
         div.classList.add('text-center');
+        
          
         div.innerHTML = `
       
@@ -52,9 +52,11 @@ const displayData = (data) => {
             <button class="btn search-button" onclick="loadDetails('${result.slug}')"  type="button ">More Details</button>
         </div> 
             `;
-       
+        
         showCard.appendChild(div);
-    }
+        
+      }
+
   }
 };
 
@@ -65,6 +67,11 @@ const loadDetails = (id) => {
         .then(res => res.json())
         .then(data => displayDetails(data));
 }
+// display more details of phone in UI
+const displayDetails = (data) => {
+    console.log(data);
 
-
+    
+    
+}
 
