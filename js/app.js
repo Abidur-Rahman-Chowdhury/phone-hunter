@@ -18,30 +18,28 @@ const displayData = (data) => {
   if (data.status == false) {
     getError.textContent = "Sorry, No phone is found";
     const searchInput = document.getElementById("search-btn");
-      const searchText = searchInput.value;
-      const showCard = document.getElementById("show-card");
-      
-      showCard.textContent = '';
-      searchInput.value = "";
-      
+    const searchText = searchInput.value;
+    const showCard = document.getElementById("show-card");
+
+    showCard.textContent = "";
+    searchInput.value = "";
   } else {
     getError.textContent = "";
     const searchInput = document.getElementById("search-btn");
     const searchText = searchInput.value;
     const resultData = data.data.slice(0, 20);
     console.log(resultData);
-      const showCard = document.getElementById("show-card");
-      
-      showCard.textContent = '';
+    const showCard = document.getElementById("show-card");
+
+    showCard.textContent = "";
 
     for (const result of resultData) {
-        const div = document.createElement("div");
-        div.classList.add("col-md-4");
-        div.classList.add('border-1');
-        div.classList.add('text-center');
-        
-         
-        div.innerHTML = `
+      const div = document.createElement("div");
+      div.classList.add("col-md-4");
+      div.classList.add("border-1");
+      div.classList.add("text-center");
+
+      div.innerHTML = `
       
          <div>
              <img src="${result.image}" class="img-fluid" />
@@ -52,35 +50,45 @@ const displayData = (data) => {
             <button class="btn search-button" onclick="loadDetails('${result.slug}')"  type="button ">More Details</button>
         </div> 
             `;
-        
-        showCard.appendChild(div);
-        
-      }
 
+      showCard.appendChild(div);
+    }
   }
 };
 
-// load more details data 
+// load more details data
 const loadDetails = (id) => {
-    const url = `https://openapi.programming-hero.com/api/phone/${id}`;
-    fetch(url)
-        .then(res => res.json())
-        .then(data => displayDetails(data));
-}
+  const url = `https://openapi.programming-hero.com/api/phone/${id}`;
+  console.log(url);
+  fetch(url)
+    .then((res) => res.json())
+    .then((data) => displayDetails(data));
+};
 // display more details of phone in UI
 const displayDetails = (data) => {
-    console.log(data.data);
+  console.log(data.data);
 
-    const showMoreDetails = document.getElementById('show-more-details');
-    const div1 = document.createElement('div');
-    div1.classList.add('col-5');
-    const div2 = document.createElement('div');
-    div2.classList.add('col-7');
-    div1.innerHTML = `
+  const showMoreDetails = document.getElementById("show-more-details");
+  showMoreDetails.textContent = "";
+  const div1 = document.createElement("div");
+  div1.classList.add("col-5");
+  const div2 = document.createElement("div");
+    div2.classList.add("col-7");
+  div1.innerHTML = `
       <img src="${data.data.image}" class="img-fluid" /> 
     `;
-
-    showMoreDetails.appendChild(div1);
-    
-}
-
+  div2.innerHTML = `
+    <h3 >${data.data.name}</h3>
+    <strong> ${data.data?.releaseDate || "Release date not found"}</strong>
+    <h4 class='mt-1 text-center'>Main Features</h4>
+    <li>Storage:${data.data.mainFeatures.storage}</li>
+    <li>Display Size:${data.data.mainFeatures.displaySize}</li>
+    <li>Chip Set:${data.data.mainFeatures.chipSet}</li>
+    <li>Memory:${data.data.mainFeatures.memory}</li>
+    <h4>Sensors:</h4>
+     <div id="show-sensor">
+    </div>
+    `;
+  showMoreDetails.appendChild(div1);
+  showMoreDetails.appendChild(div2);
+};
