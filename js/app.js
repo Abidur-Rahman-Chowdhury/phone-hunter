@@ -69,9 +69,18 @@ const loadDetails = (id) => {
 }
 // display more details of phone in UI
 const displayDetails = (data) => {
-    console.log(data);
+    console.log(data.data);
 
-    
+    const showMoreDetails = document.getElementById('show-more-details');
+    const div1 = document.createElement('div');
+    div1.classList.add('col-5');
+    const div2 = document.createElement('div');
+    div2.classList.add('col-7');
+    div1.innerHTML = `
+      <img src="${data.data.image}" class="img-fluid" /> 
+    `;
+
+    showMoreDetails.appendChild(div1);
     
 }
 
